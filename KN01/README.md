@@ -3,7 +3,7 @@
 ![alt text](image.png)
 Die Option authSource=admin im MongoDB-Connection-String bedeutet, dass die Anmeldung über die admin-Datenbank läuft. Das ist korrekt, wenn die Benutzer dort angelegt sind, auch wenn du auf eine andere Datenbank zugreifst. So wird die Authentifizierung zentral verwaltet.
 
-Mit sed wird text te im cloud init verändert.
+Mit dem Befehl: sed kann man text verändern.
 Zum Beispiel mit diesem befehl: `sudo sed -i 's/#security:/security:\n  authorization: enabled/g' /etc/mongod.conf` im cloud init abgeändert, wie man es hier (rot markiert) sehen kann: ![alt text](<Screenshot 2024-05-27 141115.png>)
 
 Diese spezifischen befehle werden verwendet:
@@ -31,4 +31,4 @@ sudo mongosh --authenticationDatabase "admin" -u "admin" -p "12345678"
 
 - 1, 2 geben alle Datenbanken auf dem MongoDB server aus
 - 3 verbindet sic zu der angegeben Datenbank
-- 4, 5 zeigt mir alle Tabellen und Collections in der ausgewählten Datenbank
+- 4, 5 zeigt mir alle Tabellen in der ausgewählten Datenbank. Collections ist ein Synonym fuer Tabellen, deshalb wird auch das selbe angezeigt.
