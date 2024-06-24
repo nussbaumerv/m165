@@ -1,27 +1,3 @@
-const song1 = db.Songs.insertOne({
-  name: "Florenz",
-  popularityIndex: 95,
-  language: "German",
-}).insertedId;
-
-const song2 = db.Songs.insertOne({
-  name: "Nokia 3310 - Bonus Track",
-  popularityIndex: 89,
-  language: "German",
-}).insertedId;
-
-const song3 = db.Songs.insertOne({
-  name: "goosebumps",
-  popularityIndex: 100,
-  language: "English",
-}).insertedId;
-
-const song4 = db.Songs.insertOne({
-  name: "MANCHESTER",
-  popularityIndex: 90,
-  language: "german",
-}).insertedId;
-
 const sponsor1 = db.Sponsors.insertOne({
   name: "Google Switzerland GMBH",
   industry: "Technology",
@@ -49,21 +25,44 @@ const act1 = db.Acts.insertOne({
   name: "Pashanim",
   label: "Urban",
   fee: 10000,
-  songs: [song1, song2],
+  songs: [
+    {
+      _id: new ObjectId(),
+      name: "Florenz",
+      popularityIndex: 95,
+      language: "German",
+    },
+    {
+      _id: new ObjectId(),
+      name: "Nokia 3310 - Bonus Track",
+      popularityIndex: 89,
+      language: "German",
+    },
+  ],
 }).insertedId;
 
 const act2 = db.Acts.insertOne({
   name: "Travis Scott",
   label: "Sony",
   fee: 5000000,
-  songs: [song3],
+  songs: {
+    _id: new ObjectId(),
+    name: "goosebumps",
+    popularityIndex: 100,
+    language: "English",
+  },
 }).insertedId;
 
 const act3 = db.Acts.insertOne({
   name: "reezy",
   label: "Universial",
   fee: 50000,
-  songs: [song4],
+  songs: {
+    _id: new ObjectId(),
+    name: "MANCHESTER",
+    popularityIndex: 90,
+    language: "german",
+  },
 }).insertedId;
 
 db.Openairs.insertMany([

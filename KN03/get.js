@@ -1,10 +1,10 @@
-db.Songs.find(
-    {name: { $regex: /^MAN/ } },
+db.Sponsors.find(
+    {name: { $regex: /^Go/ } },
     { _id: 0}   
 )
 
-db.Songs.find({
-    $or: [{ language: "German" }, { language: "german" }] 
+db.Acts.find({
+    $or: [{ label: "sony" }, { label: "Sony" }] 
 })
 
 db.Sponsors.find({

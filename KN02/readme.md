@@ -6,7 +6,7 @@ Dieses Drigramm stellt den Aufbau eines Musikfesivals dar. Ein Song kann nur ein
 [Drawio file](../../../Documents/Openairs.drawio)
 
 ##  B) Logisches Modell für MongoDB (50%)
-![alt text](image-1.png)
+![alt text](image-3.png)
 Ich habe bei Acts und Songs eine Verschachtelung gewaehlt, da ein Acts mehrer Songs haben kann ein song aber nur einen Act. Bei den attributen habe ich immer passende gewahlt, dasmit alles abgedeckt ist.
 [Drawio file](../../../Documents/Openairs-Logical.drawio) 
 
