@@ -1,4 +1,7 @@
-db.Sponsors.updateOne({ _id: sponsor1 }, { $set: { adsBudget: 60000000 } });
+db.Sponsors.updateOne(
+  { _id: ObjectId("66797efac5590bccf9667056") },
+  { $set: { adsBudget: 60000000 } }
+);
 
 db.Acts.updateMany(
   {
