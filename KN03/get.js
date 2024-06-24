@@ -1,4 +1,4 @@
-db.Sponsors.find({ name: { $regex: /^Go/ } }, { _id: 0 });
+usdb.Sponsors.find({ name: { $regex: /^Go/ } }, { _id: 0 });
 
 db.Acts.find({
   $or: [{ label: "sony" }, { label: "Sony" }],
