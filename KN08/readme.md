@@ -19,7 +19,7 @@ ORDER BY a.name;
 Anwendungsfall: Ich möchte alle Openair-Veranstaltungen finden und die Sponsoren und Acts auflisten, die daran beteiligt sind.
 
 
-Cypher-Statements:
+Cypher-Statement:
 ```
 MATCH (o:Openair)
 OPTIONAL MATCH (o)-[:HAS_SPONSORS]->(s:Sponsor)
@@ -31,7 +31,7 @@ ORDER BY o.date;
 ### Szenario 3: Finde Acts mit Songs in einer bestimmten Sprache
 Anwendungsfall: Ich möchte Acts finden, die Songs in der Sprache "Deutsch" aufführen.
 
-Cypher-Statements:
+Cypher-Statement:
 ```
 MATCH (a:Act)-[:HAS_SONGS]->(s:Song)
 WHERE s.language = "German"
@@ -41,7 +41,7 @@ ORDER BY a.name;
 ### Szenario 4: Finde Openairs mit Sponsoren, deren Werbebudget größer als 100.000 ist.
 Anwendungsfall: Ich möchten Openairs finden, die von Sponsoren mit einem Werbebudget von mehr als 100.000 gesponsert werden.
 
-Cypher-Statements:
+Cypher-Statement:
 ```
 MATCH (o:Openair)-[hs:HAS_SPONSORS]->(s:Sponsor)
 WHERE s.adsBudget > 100000
@@ -67,6 +67,80 @@ Bei der Detatch methode funktioniert es hingegen. Dies kommt daher, da durch das
 
 ## D) Daten verändern (20%)
 
+### Szenario 1: Aktualisierung der Gage eines Künstlers
+
+Anwendungsfall: Ich möchte die Gage von Travis Scott erhöhen.
+
+Cypher-Statement:
+```
+MATCH (a:Act {name: "Travis Scott"})
+SET a.fee = 6000000
+RETURN a
+```
+
+### Szenario 2: Änderung des Datums eines Openair-Festivals
+
+Anwendungsfall: Ich möchte das Datum des Zurich Openair verschieben.
+
+Cypher-Statement:
+```
+MATCH (o:Openair {name: "Zurich Openair"})
+SET o.date = date("2024-08-22")
+RETURN o
+```
+
+### Szenario 3: Hinzufügen eines neuen Sponsors zu einem Festival
+
+Anwendungsfall: Ich möchte Google Switzerland GMBH als neuer Sponsor zum Openair Frauenfeld hinzugefügen.
+
+Cypher-Statement:
+```
+MATCH (o:Openair {name: "Openair Frauenfeld"})
+MATCH (s:Sponsor {name: "Google Switzerland GMBH"})
+CREATE (o)-[r:HAS_SPONSORS {sponsorFee: 100000}]->(s)
+RETURN o, s, r
+```
+
 ## E) Zusätzliche Klauseln (20%)
+### 1. UNION
+
+Erklärung:
+UNION verbindet die Ergebnisse von zwei oder mehr Abfragen zu einer Liste.
+
+Anwendungsfall:
+Ich will eine Liste aller Acts und Sponsoren des Openair Frauenfeld erstellen.
+
+Cypher-Statement:
+```cypher
+MATCH (o:Openair {name: "Openair Frauenfeld"})-[:HAS_ACTS]->(a:Act)
+RETURN a.name AS name
+UNION
+MATCH (o:Openair {name: "Openair Frauenfeld"})-[:HAS_SPONSORS]->(s:Sponsor)
+RETURN s.name AS name
+```
+
+Erklärung meines spezifischen Beispieles:
+Dieses Statement findet zuerst alle Acts und dann alle Sponsoren des Festivals. UNION fügt diese beiden Listen zu einer zusammen.
+
+### 2. FOREACH
+
+Erklärung:
+FOREACH führt eine Aktion für jedes Element in einer Liste aus.
+
+Anwendungsfall:
+Ich will die Popularität aller Songs von Pashanim um 5 Punkte erhöhen.
+
+Cypher-Statement:
+```cypher
+MATCH (a:Act {name: "Pashanim"})-[:HAS_SONGS]->(s:Song)
+WITH a, collect(s) AS songs
+FOREACH (song IN songs |
+  SET song.popularityIndex = song.popularityIndex + 5
+)
+RETURN a, songs
+```
+
+Erklärung meines spezifischen Beispieles:
+Dieses Statement findet alle Songs von Pashanim, sammelt sie in einer Liste und erhöht dann die Popularität jedes Songs um 5 Punkte.
 
 
