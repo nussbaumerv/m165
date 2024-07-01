@@ -15,8 +15,8 @@ ORDER BY a.name;
 
 ```
 
-### Szenario 2: Finde alle Openairs mit ihren Sponsoren und Acts
-Anwendungsfall: Ich möchte alle Openair-Veranstaltungen finden und die Sponsoren und Acts auflisten, die daran beteiligt sind.
+### Szenario 2: Alle Openairs mit ihren Sponsoren und Acts funden
+Anwendungsfall: Ich möchte alle Openairs finden und die Sponsoren und Acts auflisten, die daran beteiligt sind.
 
 
 Cypher-Statement:
@@ -28,8 +28,8 @@ RETURN o.name AS Openair, s.name AS Sponsor, a.name AS Act
 ORDER BY o.date;
 ```
 
-### Szenario 3: Finde Acts mit Songs in einer bestimmten Sprache
-Anwendungsfall: Ich möchte Acts finden, die Songs in der Sprache "Deutsch" aufführen.
+### Szenario 3: Acts mit Songs in einer bestimmten Sprache finden
+Anwendungsfall: Ich möchte Acts finden, die Songs auf Deutsch aufführen.
 
 Cypher-Statement:
 ```
@@ -38,7 +38,7 @@ WHERE s.language = "German"
 RETURN a.name AS Act, s.name AS Song
 ORDER BY a.name;
 ```
-### Szenario 4: Finde Openairs mit Sponsoren, deren Werbebudget größer als 100.000 ist.
+### Szenario 4: Openairs mit Sponsoren, deren Werbebudget größer als 100.000 ist finden
 Anwendungsfall: Ich möchten Openairs finden, die von Sponsoren mit einem Werbebudget von mehr als 100.000 gesponsert werden.
 
 Cypher-Statement:
@@ -53,7 +53,7 @@ ORDER BY s.adsBudget DESC;
 Das MATCH-Statement in Neo4j wird verwendet, um Muster in der Datenbank zu finden. Es sucht nach Knoten und deren Beziehungen (Kanten) basierend auf angegebenen Kriterien.
 <br>
 
-Die OPTIONAL MATCH-Klausel in Neo4j ermöglicht es, Muster in der Datenbank zu finden, bei denen das gefundene Muster optional sein kann. Das bedeutet, dass, selbst wenn das Muster nicht gefunden wird, die übrigen Teile des Musters in das Ergebnis einbezogen werden, jedoch mit NULL-Werten für die nicht gefundenen Teile. Sie wird verwendet, um sicherzustellen, dass bestimmte Beziehungen oder Muster vorhanden sein können, aber nicht erforderlich sind, um das Ergebnis zurückzugeben.
+OPTIONAL MATCH findet Muster in der Datenbank, auch wenn Teile davon fehlen können. Wenn etwas nicht gefunden wird, zeigt das Ergebnis NULL für diese Teile an, anstatt die ganze Zeile auszulassen. Es ist nützlich, wenn man Daten sucht, die möglicherweise, aber nicht unbedingt, vorhanden sind.
 
 
 ## C) Daten löschen (20%)
@@ -78,7 +78,7 @@ SET a.fee = 6000000
 RETURN a
 ```
 
-### Szenario 2: Änderung des Datums eines Openair-Festivals
+### Szenario 2: Änderung des Datums eines Openairs
 
 Anwendungsfall: Ich möchte das Datum des Zurich Openair verschieben.
 
@@ -89,7 +89,7 @@ SET o.date = date("2024-08-22")
 RETURN o
 ```
 
-### Szenario 3: Hinzufügen eines neuen Sponsors zu einem Festival
+### Szenario 3: Hinzufügen eines neuen Sponsors zu einem Openair
 
 Anwendungsfall: Ich möchte Google Switzerland GMBH als neuer Sponsor zum Openair Frauenfeld hinzugefügen.
 
@@ -120,7 +120,7 @@ RETURN s.name AS name
 ```
 
 Erklärung meines spezifischen Beispieles:
-Dieses Statement findet zuerst alle Acts und dann alle Sponsoren des Festivals. UNION fügt diese beiden Listen zu einer zusammen.
+Dieses Statement findet zuerst alle Acts und dann alle Sponsoren des Openairs. UNION fügt diese beiden Listen zu einer zusammen.
 
 ### 2. FOREACH
 
@@ -128,7 +128,7 @@ Erklärung:
 FOREACH führt eine Aktion für jedes Element in einer Liste aus.
 
 Anwendungsfall:
-Ich will die Popularität aller Songs von Pashanim um 5 Punkte erhöhen.
+Ich will die Popularität aller Songs von Pashanim um 5 erhöhen.
 
 Cypher-Statement:
 ```cypher
@@ -141,6 +141,6 @@ RETURN a, songs
 ```
 
 Erklärung meines spezifischen Beispieles:
-Dieses Statement findet alle Songs von Pashanim, sammelt sie in einer Liste und erhöht dann die Popularität jedes Songs um 5 Punkte.
+Dieses Statement findet alle Songs von Pashanim, sammelt sie in einer Liste und erhöht dann die Popularität jedes Songs um 5.
 
 
