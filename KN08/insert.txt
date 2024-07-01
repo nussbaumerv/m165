@@ -1,0 +1,99 @@
+CREATE 
+  (sponsor1: Sponsor {
+    id: 'UUID1',
+    name: "Google Switzerland GMBH",
+    industry: "Technology",
+    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1024px-Google_%22G%22_logo.svg.png",
+    adsBudget: 50000000
+  }),
+  (sponsor2: Sponsor {
+    id: 'UUID2',
+    name: "Swisscom",
+    industry: "Technology",
+    logoUrl: "https://upload.wikimedia.org/wikipedia/de/2/24/Logo_Swisscom.svg",
+    adsBudget: 75000
+  }),
+  (sponsor3: Sponsor {
+    id: 'UUID3',
+    name: "Migros",
+    industry: "Supermarket",
+    logoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiw9WrIzljU2nQRc7yx-BYXTGcMiMIisS6hw&s",
+    adsBudget: 90000
+  }),
+  (act1: Act {
+    id: 'UUID4',
+    name: "Pashanim",
+    label: "Urban",
+    fee: 10000
+  }),
+  (song1a: Song {
+    id: 'UUID5',
+    name: "Florenz",
+    popularityIndex: 95,
+    language: "German"
+  }),
+  (song1b: Song {
+    id: 'UUID6',
+    name: "Nokia 3310 - Bonus Track",
+    popularityIndex: 89,
+    language: "German"
+  }),
+  (act2: Act {
+    id: 'UUID7',
+    name: "Travis Scott",
+    label: "Sony",
+    fee: 5000000
+  }),
+  (song2: Song {
+    id: 'UUID8',
+    name: "goosebumps",
+    popularityIndex: 100,
+    language: "English"
+  }),
+  (act3: Act {
+    id: 'UUID9',
+    name: "reezy",
+    label: "Universal",
+    fee: 50000
+  }),
+  (song3: Song {
+    id: 'UUID10',
+    name: "MANCHESTER",
+    popularityIndex: 90,
+    language: "German"
+  }),
+  (openair1: Openair {
+    id: 'UUID11',
+    name: "Openair Frauenfeld",
+    location: "Frauenfeld",
+    date: date("2024-07-15"),
+    maxOccupancy: 500000
+  })-[:HAS_SPONSORS { sponsorFee: 75000 }]->(sponsor2),
+  (openair1)-[:HAS_SPONSORS { sponsorFee: 90000 }]->(sponsor3),
+  (openair1)-[:HAS_ACTS { date: date("2024-07-15") }]->(act1),
+  (openair1)-[:HAS_ACTS { date: date("2024-07-15") }]->(act3),
+
+  (openair2: Openair {
+    id: 'UUID12',
+    name: "Zurich Openair",
+    location: "Zurich",
+    date: date("2024-08-15"),
+    maxOccupancy: 50000
+  })-[:HAS_SPONSORS { sponsorFee: 90000 }]->(sponsor3),
+  (openair2)-[:HAS_ACTS { date: date("2024-08-15") }]->(act3),
+
+  (openair3: Openair {
+    id: 'UUID13',
+    name: "Rolling Loud",
+    location: "Wien",
+    date: date("2024-06-15"),
+    maxOccupancy: 5000000
+  })-[:HAS_SPONSORS { sponsorFee: 50000000 }]->(sponsor1),
+  (openair3)-[:HAS_ACTS { date: date("2024-06-15") }]->(act1),
+  (openair3)-[:HAS_ACTS { date: date("2024-06-15") }]->(act2),
+  (openair3)-[:HAS_ACTS { date: date("2024-06-15") }]->(act3),
+
+  (act1)-[:HAS_SONGS]->(song1a),
+  (act1)-[:HAS_SONGS]->(song1b),
+  (act2)-[:HAS_SONGS]->(song2),
+  (act3)-[:HAS_SONGS]->(song3);

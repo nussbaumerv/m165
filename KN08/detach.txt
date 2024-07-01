@@ -1,0 +1,11 @@
+MATCH (s:Sponsor)
+DETACH DELETE s;
+
+MATCH (a:Act)
+DETACH DELETE a;
+
+MATCH (sg:Song)
+DETACH DELETE sg;
+
+MATCH (o:Openair)
+DETACH DELETE o;
